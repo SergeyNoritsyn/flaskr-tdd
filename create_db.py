@@ -1,6 +1,5 @@
 # create_db.py
 
-from sqlalchemy import inspect
 from project.app import app, db
 from project.models import Post
 
