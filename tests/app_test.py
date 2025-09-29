@@ -76,6 +76,7 @@ def test_messages(client):
     assert b"&lt;Hello&gt;" in rv.data
     assert b"<strong>HTML</strong> allowed here" in rv.data
 
+
 def test_delete_message(client):
     """Ensure the messages are being deleted"""
     rv = client.get("/delete/1")
@@ -86,16 +87,18 @@ def test_delete_message(client):
     data = json.loads(rv.data)
     assert data["status"] == 1
 
+
 def test_search(client):
     """Ensure the search page works"""
-    rv = client.get('/search/')
+    rv = client.get("/search/")
     assert rv.status_code == 200
-    rv = client.get('/search/?query=test')
+    rv = client.get("/search/?query=test")
     assert rv.status_code == 200
+
 
 def test_unauthorized_delete(client):
     """Ensure that deleting a post when not logged in is unauthorized"""
-    rv = client.get('/delete/1')
+    rv = client.get("/delete/1")
     data = json.loads(rv.data)
     assert data["status"] == 0
     assert rv.status_code == 401
